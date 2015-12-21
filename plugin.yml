@@ -1,0 +1,25 @@
+name: IngotsBlocks
+version: 2.0
+description: Good old hunger system
+author: TaoPablot
+main: me.thenewtao.ingotblock.IngotBlockMain
+commands:
+  tnt:
+    description: Converts ingots into blocks
+    permission: ingotblock.tnt
+    usage: /tnt
+  ingot:
+    description: Converts ingots into blocks
+    permission: ingotblock.ingot
+    usage: /ingot
+  block:
+    description: Converts blocks into ingots
+    permission: ingotblock.block 
+    usage: /block
+permissions:
+  ingotblock.ingot:
+    description: Access /ingot
+    default: op
+  ingotblock.block:
+    description: Access /block
+    default: op
