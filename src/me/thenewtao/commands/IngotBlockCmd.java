@@ -12,7 +12,7 @@ import me.thenewtao.ingotblock.IngotBlockMain;
 
 public class IngotBlockCmd implements CommandExecutor {
 
-	IngotBlockMain main;
+	private IngotBlockMain main;
 
 	public IngotBlockCmd(IngotBlockMain main) {
 		this.main = main;
@@ -23,10 +23,10 @@ public class IngotBlockCmd implements CommandExecutor {
 		if (sender instanceof Player && sender != null) {
 			Player p = (Player) sender;
 			if (cmd.getName().equalsIgnoreCase("ingot") && sender.hasPermission("ingotblock.ingot")) {
-				if (main.b.containsKey(p.getItemInHand().getType())) {
+				if (main.getBlocks().containsKey(p.getItemInHand().getType())) {
 					Material m = p.getItemInHand().getType();
 					int amount = p.getItemInHand().getAmount();
-					p.getInventory().addItem(new ItemStack(main.b.get(m), (amount * 9)));
+					p.getInventory().addItem(new ItemStack(main.getBlocks().get(m), (amount * 9)));
 					p.getInventory().setItemInHand(new ItemStack(Material.AIR, 1));
 				} else if (p.getItemInHand().getType() == Material.QUARTZ_BLOCK) {
 					Material m = p.getItemInHand().getType();
@@ -62,14 +62,14 @@ public class IngotBlockCmd implements CommandExecutor {
 			}
 			if (cmd.getName().equalsIgnoreCase("block") && sender.hasPermission("ingotblock.block")) {
 				ItemStack lapiz = new ItemStack(Material.INK_SACK, 1, (byte) 4);
-				if (main.i.containsKey(p.getItemInHand().getType())) {
+				if (main.getIngots().containsKey(p.getItemInHand().getType())) {
 					int amount = p.getItemInHand().getAmount();
 					Material m = p.getItemInHand().getType();
 					if (amount > 8) {
 						int total = amount / 9;
 						int remainder = amount % 9;
 						p.getInventory().setItemInHand(new ItemStack(Material.AIR, 1));
-						p.getInventory().addItem(new ItemStack(main.i.get(m), total));
+						p.getInventory().addItem(new ItemStack(main.getIngots().get(m), total));
 						p.getInventory().addItem(new ItemStack(m, remainder));
 					} else {
 						sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "========================");
@@ -84,7 +84,7 @@ public class IngotBlockCmd implements CommandExecutor {
 						int total = amount / 4;
 						int remainder = amount % 4;
 						p.getInventory().setItemInHand(new ItemStack(Material.AIR, 1));
-						p.getInventory().addItem(new ItemStack(main.i.get(m), total));
+						p.getInventory().addItem(new ItemStack(main.getIngots().get(m), total));
 						p.getInventory().addItem(new ItemStack(m, remainder));
 					} else {
 						sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "========================");
